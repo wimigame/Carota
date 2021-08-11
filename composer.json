@@ -1,0 +1,27 @@
+{
+  "name": "carota/carota",
+  "description": "Carota",
+  "type": "project",
+  "keywords": [
+    "carota",
+    "framework",
+    "opensource"
+  ],
+  "homepage": "https://localhost:3000",
+  "license": "待定",
+  "support": {
+    "email": "wimigame@gmail.com",
+    "issues": "https://localhost:3000",
+    "forum": "https://localhost:3000",
+    "wiki": "https://localhost:3000",
+    "source": "https://localhost:3000",
+    "docs": "https://localhost:3000"
+  },
+  "config": {
+    "vendor-dir": "./vendor/"
+  },
+  "require": {
+    "php": ">=7.1.0",
+    "twig/twig": "^3.0"
+  }
+}
