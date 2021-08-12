@@ -35,7 +35,7 @@
     $registry->set('response',$response);
 
     // 数据库连接
-    $db = new \Carota\System\Libs\Db('pdo', '39.100.91.69', 'test123', 'GjPjWsjGhKGraP84', 'test123');
+    $db = new \Carota\System\Libs\Db('pdo', '127.0.0.1', 'test123', 'admin', 'test123');
 	$registry->set('db', $db);
     $db->query("SET time_zone = '" . $db->escape(date('P')) . "'");
 
