@@ -23,8 +23,7 @@ class Loader
 
     public function model($modelPath) {
         $modelPath  = preg_replace('/[^a-zA-Z0-9_\/]/', '', $modelPath);
-		$modelPaths = explode('/',$modelPath);
-		$class = 'Carota\App\\' . ucwords($modelPaths[0]) . '\Model\\' .ucwords($modelPaths[1]).'\\' . ucwords($modelPaths[2]);
+		$class = 'Carota\App\Model\\' .str_replace(['_', '/'], ['', '\\'], ucwords($modelPath, '_/'));
         if (class_exists($class)) {
             return new $class($this->registry);
         } else {
@@ -34,7 +33,6 @@ class Loader
 
     public function view(string $viewPath, array $data = []): string {
         $viewPath  = preg_replace('/[^a-zA-Z0-9_\/]/', '', $viewPath);
-		$viewPaths = explode('/',$viewPath);
 
 		// Keep the original trigger
 		// $trigger = $route;
@@ -45,7 +43,7 @@ class Loader
 		// $this->event->trigger('view/' . $trigger . '/before', [&$route, &$data, &$code]);
 
 		// Make sure its only the last event that returns an output if required.
-		$output = $this->template->render($viewPaths[0].'/view/template/'.$viewPaths[1].'/'.$viewPaths[2], $data, $code);
+		$output = $this->template->render($viewPath, $data, $code);
 
 		// Trigger the post events
 		// $this->event->trigger('view/' . $trigger . '/after', [&$route, &$data, &$output]);

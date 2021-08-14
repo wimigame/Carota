@@ -30,12 +30,11 @@ class Autoloader
 
 			if (isset($this->path[$namespace])) {
 				$file = $this->path[$namespace] . trim(str_replace('\\', '/', strtolower(preg_replace('~([a-z])([A-Z]|[0-9])~', '\\1_\\2', substr($class, strlen($namespace))))), '/') . '.php';
-			}
+            }
 		}
 
 		if (isset($file) && is_file($file)) {
 			include_once($file);
-
 			return true;
 		} else {
 			return false;

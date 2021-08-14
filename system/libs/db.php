@@ -6,12 +6,12 @@ class Db
 {
     private $adaptor;
 
-    public function __construct($adaptor, $hostname, $username, $password, $database, $port = '3306')
+    public function __construct()
     {
-        $class = 'Carota\System\Libs\Db\\'.ucwords($adaptor);
+        $class = 'Carota\System\Libs\Db\\'.ucwords(DB_DRIVER);
         if(class_exists($class))
         {
-            $this->adaptor = new $class($hostname, $username, $password, $database, $port);
+            $this->adaptor = new $class();
         }else
         {
             throw new \Exception('Error: Could not load database adapter: '.ucwords($adaptor));

@@ -1,0 +1,16 @@
+{{ name }}
+<p>jfldjslfjdlksjl</p>
+{{ result }}
+
+</br>
+</br>
+
+{{ random('ABC') }}
+
+{{ include(template_from_string(muban)) }}
+
+{{ abc() }}
+
+{% for aaa in ['1','2','3'] %}
+    {% include("app/view/default/account/bbb#{aaa}.twig") %}
+{% endfor %}

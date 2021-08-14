@@ -8,10 +8,10 @@ class Pdo
     private $data = array();
     private $affected;
 
-    public function __construct($hostname, $username, $password, $database, $port)
+    public function __construct()
     {
         try {
-			$pdo = new \PDO('mysql:host=' . $hostname . ';port=' . $port . ';dbname=' . $database, $username, $password, array(\PDO::ATTR_PERSISTENT => false));
+			$pdo = new \PDO('mysql:host=' . DB_HOSTNAME . ';port=' . DB_PORT . ';dbname=' . DB_DATABASE, DB_USERNAME, DB_PASSWORD, array(\PDO::ATTR_PERSISTENT => false));
 		} catch (\PDOException $e) {
 			throw new \Exception('Error: Could not make a database link using ' . $username . '@' . $hostname . '!');
 		}

@@ -3,8 +3,8 @@
     error_reporting(E_ALL);
 
     //检查php版本
-    if (version_compare(phpversion(), '7.1.0', '<') == true) {
-        exit('Php 版本必须大于或等于 7.1.0');
+    if (version_compare(phpversion(), '7.2.0', '<') == true) {
+        exit('Php 版本必须大于或等于 7.2.0');
     }
 
     //设置时区

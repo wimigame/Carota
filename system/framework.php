@@ -5,6 +5,8 @@
     $autoloader->register('Carota\App', DIR_APP);
     // 注册系统文件
     $autoloader->register('Carota\System', DIR_SYSTEM);
+    // 注册扩展的目录
+    $autoloader->register('Carota\Extension', DIR_EXTENSION);
 
     // 注册者模式
     $registry = new \Carota\System\Engine\Registry();
@@ -35,18 +37,17 @@
     $registry->set('response',$response);
 
     // 数据库连接
-    $db = new \Carota\System\Libs\Db('pdo', '127.0.0.1', 'test123', 'admin', 'test123');
+    $db = new \Carota\System\Libs\Db();
 	$registry->set('db', $db);
     $db->query("SET time_zone = '" . $db->escape(date('P')) . "'");
 
     // 模板
-    $template = new \Carota\System\Libs\Template('twig');
-    $template->addPath(DIR_ROOT.'app/');
+    $template = new \Carota\System\Libs\Template('twig',$registry);
+    $template->addPath(DIR_APP.'view/default/');
     $registry->set('template', $template);
 
     // 路由动作
     $action = new \Carota\System\Engine\Action($request->server['PATH_INFO']);
-    //执行这个动作
     $action->execute($registry);
     
     $response->output();

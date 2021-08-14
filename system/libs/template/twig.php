@@ -8,9 +8,11 @@ class Twig
     protected $loader;
     protected $directory;
     protected $path = array();
+	protected $registry = array();
 
-    public function __construct()
+    public function __construct($registry)
     {
+		$this->registry = $registry;
         $this->root = substr(DIR_ROOT, 0, -1);
         $this->loader = new \Twig\Loader\FilesystemLoader('/', $this->root);
     }
@@ -67,7 +69,20 @@ class Twig
 			];
 
 			$twig = new \Twig\Environment($loader, $config);
-            
+			$twig->addExtension(new \Twig\Extension\StringLoaderExtension());
+
+			// 渲染组件
+			$data['mubanvalue'] = "你好";
+			$data['muban'] = "Hello {{ mubanvalue }}";
+			foreach(Component as $ext)
+			{
+				if(class_exists($ext))
+				{
+					$twig->addExtension(new $ext($this->registry));
+				}else{
+					var_dump("此类不存在");
+				}
+			}
 			return $twig->render($file, $data);
 		} catch (Twig_Error_Syntax $e) {
 			throw new \Exception('Error: Could not load template ' . $filename . '!');
